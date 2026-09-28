@@ -32,6 +32,49 @@ format:
 - [ ] Use a for loop to print the numbers 1 to 5.
 - [ ] Use a for loop to compute the mean of a numeric vector.
 
+```{r}
+print("hello world")
+prints <- function(name) {
+  cat("hello" , name)
+} 
+prints("abby")
+
+#to_print <- paste0("Hello", name, "nice to meet you")
+
+answer <- 42
+vector1 <- (1:5)
+print(vector1)
+vector2 <- (1:10000)
+matrix1 <- matrix(1:100, ncol = 10, nrow=10, byrow = TRUE)
+print(matrix1)
+
+df <- data.frame(
+  name = c("abby", "laura", "katie"),
+  age = c("19", "23", "21")
+)
+square1 <- function(number){
+  number^2
+}
+print(square1(30))
+
+for (i in 1:5){
+  print(i) 
+}
+
+mean1 <- function(vector){
+  my_sum = 0
+  len = length(vector)
+  for(i in 1:len){
+    #print(paste0("i=", i))
+  my_sum = my_sum + vector[i]
+  }
+  mean = my_sum/len
+  return(mean)
+}
+
+mean1(vector1)
+
+```
 
 ## Part 1b: Lists
 
@@ -121,6 +164,35 @@ students <- data.frame(
     name = c("Ada", "Alan", "Grace", "Edsger", "Katherine"),
     score = c(72, 65, 43, 38, 91)
 )
+students$result <- if_else(students$score >= 40, "pass", "fail")
+
+print(students)
+
+students$grade <- case_when(
+  students$score >= 70 ~ "first",
+  students$score >= 60 ~ "2:1",
+  students$score >= 50 ~ "2:2",
+  students$score >= 40 ~ "third",
+  TRUE ~ "fail"
+)
+print(students)
+
+is_leap_year <- function(year){
+  leap <- NULL
+  if (year %% 400 == 0) {leap = TRUE}
+  else if (year %% 100 == 0) {leap = FALSE}
+  else if (year %% 4 == 0)   {leap = TRUE}
+  else {leap = FALSE}
+  return(leap)
+}
+
+stopifnot(
+    is_leap_year(2000) == TRUE,   # divisible by 400
+    is_leap_year(2024) == TRUE,   # divisible by 4, not by 100
+    is_leap_year(1900) == FALSE,  # divisible by 100, not by 400
+    is_leap_year(2100) == FALSE   # divisible by 100, not by 400
+)
+
 ```
 
 - [ ] Using `if_else`, add a new column `result` to `students` that is `"pass"` when the score is at least 40 and `"fail"` otherwise.
